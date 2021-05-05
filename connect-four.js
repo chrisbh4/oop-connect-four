@@ -25,10 +25,32 @@ select the sqaure that you want to place it in , create a div with a class of
 
 */
 
+window.addEventListener("DOMContentLoaded", () =>{
 
-//CF : Start a new game
+import {Game} from "./game.js"
 
-/*
-1.
+const game = undefined
+const player1 = document.getElementById("player-1-name").value;
+const player2 = document.getElementById("player-2-name").value;
 
-*/
+const enableGame = function(event){
+    if (player1 && player2){
+    document.getElementById("new-game").removeAttribute("disabled");
+
+    }
+
+}
+document.getElementsById("player-1-name").addEventListener("keyup", enableGame)
+
+document.getElementsById("player-2-name").addEventListener("keyup", enableGame)
+
+document.getElementById("new-game").addEventListener("click", event =>{
+
+})
+
+
+
+
+
+
+})
