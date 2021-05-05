@@ -1,3 +1,5 @@
+import Game from "./game.js"
+
 //CF : UI
 /*
 1.Column is full :
@@ -24,29 +26,66 @@ select the sqaure that you want to place it in , create a div with a class of
 
 
 */
+//function updateUI()
+
+
+
+let game = undefined
+
+function updateUI(){
+    if(!game){
+    document.getElementById('board-holder').setAttribute('class ', 'is-invisible')
+    }
+    else {
+        document.getElementById('board-holder').removeAttribute('class', 'is-invisible')
+        let name = game.getName()
+        document.getElementById('game-name').innerHTML =  name
+    }
+}
 
 window.addEventListener("DOMContentLoaded", () =>{
 
-import {Game} from "./game.js"
 
-const game = undefined
-const player1 = document.getElementById("player-1-name").value;
-const player2 = document.getElementById("player-2-name").value;
+// let game = new Game()
 
-const enableGame = function(event){
-    if (player1 && player2){
-    document.getElementById("new-game").removeAttribute("disabled");
 
-    }
+function enableGame (){
+    const player1 = document.getElementById("player-1-name").value;
+    const player2 = document.getElementById("player-2-name").value;
+    const isValidForm = player1.length > 0 && player2.length > 0;
+
+
+   document.getElementById("new-game").disabled = !isValidForm
+//document.getElementById("new-game").setAttribute('disabled', false)
 
 }
-document.getElementsById("player-1-name").addEventListener("keyup", enableGame)
 
-document.getElementsById("player-2-name").addEventListener("keyup", enableGame)
+document.getElementById("player-1-name").addEventListener("keyup",() =>{
+    enableGame()
+})
+
+document.getElementById("player-2-name").addEventListener("keyup", () =>{
+
+    enableGame()
+})
 
 document.getElementById("new-game").addEventListener("click", event =>{
+    const player1 = document.getElementById("player-1-name").value;
+    const player2 = document.getElementById('player-2-name').value;
+  game = new Game(player1, player2)
 
+  document.getElementById("new-game").disabled = true
+
+   let player1Value= document.getElementById('player-1-name')
+         player1Value.value = ''
+
+    let player2Value = document.getElementById('player-2-name')
+             player2Value.value = ''
+
+
+    updateUI()
 })
+
 
 
 
