@@ -10,8 +10,15 @@ constructor(){
         }
 
 
-    getTokenAt(rowIndex){
-       return this.tokens[rowIndex]
+    getTokenAtRow(rowIndex){
+       return this.token[5 - rowIndex]
     }
+    isFull(){
+      return this.token.length === 6
+   //   if(this.token[0]){
+   //      return
+     //}
+    }
+
 
 }

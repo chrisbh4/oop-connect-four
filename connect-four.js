@@ -1,5 +1,5 @@
 import Game from "./game.js"
-
+import Column from "./column.js"
 //CF : UI
 /*
 1.Column is full :
@@ -31,6 +31,7 @@ select the sqaure that you want to place it in , create a div with a class of
 
 
 let game = undefined
+let column = undefined
 
 
 function updateUI(){
@@ -47,12 +48,44 @@ function updateUI(){
       if( game.currentPlayerIndicator === 1   ){
           clickTargets.classList.remove('red')
         clickTargets.classList.add('black')
-      }else {
+      }else{
 
        clickTargets.classList.remove('black')
        clickTargets.classList.add('red')
 
     }
+
+    for (let i = 0; i <= 5; i++){
+        for (let j = 0; j <= 6; j++){
+            let squareRowColumn = document.getElementById("square-"+ i +"-"+j)
+            squareRowColumn.innerHTML = ""
+           const playerNum = game.getTokenAt(i, j)
+           if(playerNum === 1){
+               const blackToken = document.createElement("div")
+               blackToken.classList.add("black", "token")
+               squareRowColumn.appendChild(blackToken)
+           }
+           else
+           if (playerNum === 2){
+               const redToken = document.createElement("div")
+               redToken.classList.add("red", "token")
+               squareRowColumn.appendChild(redToken)
+           }
+        }
+
+    }
+        for (let columnIndex = 0; columnIndex <= 6; columnIndex++){
+            const isColumnFull = game.isColumnFull(columnIndex)
+            const columnId = `column-${columnIndex}`
+            const column = document.getElementById(columnId)
+            if(isColumnFull){
+                column.classList.add("full")
+            }
+            else{
+                column.classList.remove("full")
+            }
+        }
+
 
 
 
@@ -109,11 +142,14 @@ document.getElementById("new-game").addEventListener("click", event =>{
     document.getElementById('click-targets').addEventListener('click' , event =>{
         let getIdx = event.target.id.split("-")
         let [uselessString, number] = getIdx
+    if(!event.target.id.includes("column-")) return
 
+    if(game.column[Number (number)].isFull()) return
 
        // game = Game.prototype.playInColumn()
        game.playInColumn(Number(number))
        updateUI()
+
     })
 
 
