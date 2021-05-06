@@ -48,13 +48,13 @@ window.addEventListener("DOMContentLoaded", () =>{
 
 // let game = new Game()
 
-
+//enables the new game button once both player's inputs have been filled
 function enableGame (){
     const player1 = document.getElementById("player-1-name").value;
     const player2 = document.getElementById("player-2-name").value;
     const isValidForm = player1.length > 0 && player2.length > 0;
 
-
+//changes the disabled button from on to off
    document.getElementById("new-game").disabled = !isValidForm
 //document.getElementById("new-game").setAttribute('disabled', false)
 
@@ -69,12 +69,15 @@ document.getElementById("player-2-name").addEventListener("keyup", () =>{
     enableGame()
 })
 
+//listens for the click on the button of the new game ID
 document.getElementById("new-game").addEventListener("click", event =>{
     const player1 = document.getElementById("player-1-name").value;
     const player2 = document.getElementById('player-2-name').value;
   game = new Game(player1, player2)
 
   document.getElementById("new-game").disabled = true
+
+//changes the player's input to show a empty string once the new game button has been clicked
 
    let player1Value= document.getElementById('player-1-name')
          player1Value.value = ''
