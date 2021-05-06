@@ -32,6 +32,7 @@ select the sqaure that you want to place it in , create a div with a class of
 
 let game = undefined
 
+
 function updateUI(){
     if(!game){
     document.getElementById('board-holder').setAttribute('class ', 'is-invisible')
@@ -41,6 +42,22 @@ function updateUI(){
         let name = game.getName()
         document.getElementById('game-name').innerHTML =  name
     }
+   let clickTargets =  document.getElementById('click-targets')
+
+      if( game.currentPlayerIndicator === 1   ){
+          clickTargets.classList.remove('red')
+        clickTargets.classList.add('black')
+      }else {
+
+       clickTargets.classList.remove('black')
+       clickTargets.classList.add('red')
+
+    }
+
+
+
+
+
 }
 
 window.addEventListener("DOMContentLoaded", () =>{
@@ -89,10 +106,15 @@ document.getElementById("new-game").addEventListener("click", event =>{
     updateUI()
 })
 
+    document.getElementById('click-targets').addEventListener('click' , even =>{
+       // game = Game.prototype.playInColumn()
+       game.playInColumn()
+       updateUI()
+    })
 
 
 
 
 
 
-})
+}) //End of DOM loader
