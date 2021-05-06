@@ -106,9 +106,13 @@ document.getElementById("new-game").addEventListener("click", event =>{
     updateUI()
 })
 
-    document.getElementById('click-targets').addEventListener('click' , even =>{
+    document.getElementById('click-targets').addEventListener('click' , event =>{
+        let getIdx = event.target.id.split("-")
+        let [uselessString, number] = getIdx
+
+
        // game = Game.prototype.playInColumn()
-       game.playInColumn()
+       game.playInColumn(Number(number))
        updateUI()
     })
 
